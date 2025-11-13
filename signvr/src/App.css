@@ -1,0 +1,197 @@
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 4rem);
+  color: #f8fafc;
+  background: linear-gradient(180deg, rgba(66, 32, 125, 0.85) 0%, rgba(28, 106, 164, 0.7) 45%, rgba(241, 248, 255, 0.6) 100%);
+  overflow: hidden;
+}
+
+.app-shell::before {
+  content: '';
+  position: absolute;
+  inset: 10% 15%;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.45), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgba(56, 189, 248, 0.35), transparent 60%);
+  filter: blur(40px);
+  z-index: 0;
+}
+
+.home-panel {
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: left;
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+
+.home-panel.hidden {
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+}
+
+.home-panel.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero .tagline {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  color: rgba(241, 245, 249, 0.9);
+  margin-bottom: 0.75rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 12px 24px rgba(15, 23, 42, 0.4);
+}
+
+.hero .intro {
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  margin-top: 1.5rem;
+  max-width: 36ch;
+  color: rgba(226, 232, 240, 0.92);
+}
+
+.module-grid {
+  margin-top: clamp(2rem, 6vw, 3.5rem);
+  display: grid;
+  gap: clamp(1rem, 4vw, 1.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.module-card {
+  position: relative;
+  background: rgba(15, 23, 42, 0.28);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 20px;
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: inherit;
+  text-align: left;
+  transition: transform 220ms ease, border 220ms ease, box-shadow 220ms ease;
+  cursor: pointer;
+}
+
+.module-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(140deg, rgba(96, 165, 250, 0.35), rgba(192, 132, 252, 0.35));
+  opacity: 0;
+  transition: opacity 220ms ease;
+  z-index: -1;
+}
+
+.module-card:hover,
+.module-card:focus-visible {
+  transform: translateY(-6px);
+  border-color: rgba(226, 232, 240, 0.5);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.35);
+}
+
+.module-card:hover::after,
+.module-card:focus-visible::after {
+  opacity: 1;
+}
+
+.module-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.module-subtitle {
+  font-size: 0.95rem;
+  color: rgba(226, 232, 240, 0.82);
+  line-height: 1.4;
+}
+
+.scene-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms ease;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.scene-wrapper.scene-ready {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scene-wrapper a-scene,
+.scene-wrapper canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.scene-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.55));
+  color: #e0f2fe;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(6px);
+}
+
+.return-button {
+  position: absolute;
+  top: clamp(1rem, 4vw, 2rem);
+  left: clamp(1rem, 3vw, 2rem);
+  z-index: 3;
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: #e2e8f0;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 200ms ease, transform 200ms ease, border 200ms ease;
+}
+
+.return-button:hover,
+.return-button:focus-visible {
+  background: rgba(59, 130, 246, 0.6);
+  border-color: rgba(191, 219, 254, 0.8);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding: 1.5rem;
+  }
+
+  .hero .intro {
+    max-width: unset;
+  }
+
+  .scene-overlay {
+    font-size: 1rem;
+  }
+}
